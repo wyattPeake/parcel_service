@@ -1,0 +1,102 @@
+version: '3.7'
+
+services:
+    frontend:
+        image: finneganhu/frontend:prom
+        ports:
+            - "8084:8084"
+        environment:
+            - JAEGER_AGENT_HOST=jaeger
+            - JAEGER_AGENT_PORT=6831
+    customer:
+        image: finneganhu/customer:prom
+        ports:
+            - "8081:8081"
+        environment:
+            - JAEGER_AGENT_HOST=jaeger
+            - JAEGER_AGENT_PORT=6831
+    driver:
+        image: finneganhu/driver:prom
+        ports:
+            - "8082:8082"
+        environment:
+            - JAEGER_AGENT_HOST=jaeger
+            - JAEGER_AGENT_PORT=6831
+    route:
+        image: finneganhu/route:prom
+        ports:
+            - "8083:8083"
+        environment:
+            - JAEGER_AGENT_HOST=jaeger
+            - JAEGER_AGENT_PORT=6831
+    thirdparty:
+        image: finneganhu/thirdparty:prom
+        ports:
+            - "8085:8085"
+
+    jaeger:
+        image: jaegertracing/all-in-one:latest
+        ports:
+            - "6831:6831/udp"
+            - "16686:16686"
+            - "14269:14269"
+    prometheus:
+        image: prom/prometheus:latest
+        container_name: prometheus
+        ports:
+            - "9090:9090"
+        command:
+            - --config.file=/etc/prometheus/prometheus.yml
+        volumes:
+            - ./prometheus:/etc/prometheus
+    alertmanager:
+        image: prom/alertmanager:latest
+        ports:
+            - "9093:9093"
+        volumes:
+            - "./prometheus/alertmanager:/etc/alertmanager"
+        command:
+            - '--config.file=/etc/alertmanager/alertmanager.yml'
+            - '--storage.path=/alertmanager'
+    grafana:
+        image: grafana/grafana:7.0.0
+        depends_on:
+            - prometheus
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./grafana/provisioning/:/etc/grafana/provisioning/
+        environment:
+            - GF_INSTALL_PLUGINS=grafana-worldmap-panel
+    cadvisor:
+        image: google/cadvisor:latest
+        container_name: cadvisor
+        privileged: true
+        ports:
+            - "8080:8080"
+        volumes:
+            - /:/rootfs:ro
+            - /var/run:/var/run:rw
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+        depends_on:
+            - frontend
+            - route
+            - driver
+            - customer
+    # gremlin:
+    #     image: gremlin/gremlin
+    #     pid: "host"
+    #     network_mode: "host"
+    #     cap_add:
+    #         - NET_ADMIN
+    #         - SYS_BOOT
+    #         - SYS_TIME
+    #         - KILL
+    #     environment:
+    #         - GREMLIN_TEAM_ID="f7270c37-8534-5c0a-b3e5-8ee8be83d10e"
+    #         - GREMLIN_TEAM_SECRET="b18b5621-ff7b-484f-8b56-21ff7b284fee"
+    #     volumes:
+    #         - $PWD/var/lib/gremlin:/var/lib/gremlin
+    #         - $PWD/var/log/gremlin:/var/log/gremlin
+    #     command: daemon

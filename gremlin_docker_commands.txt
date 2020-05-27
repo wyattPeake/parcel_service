@@ -1,0 +1,67 @@
+docker run -d --net=host \
+    --cap-add=NET_ADMIN --cap-add=SYS_BOOT --cap-add=SYS_TIME \
+    --cap-add=KILL \
+    -v $PWD/var/lib/gremlin:/var/lib/gremlin \
+    -v $PWD/var/log/gremlin:/var/log/gremlin \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -e GREMLIN_TEAM_ID="f7270c37-8534-5c0a-b3e5-8ee8be83d10e" \
+    -e GREMLIN_TEAM_SECRET="b18b5621-ff7b-484f-8b56-21ff7b284fee" \
+    gremlin/gremlin daemon
+
+
+    docker run -d \
+        --net=host \
+        --pid=host \
+        --cap-add=NET_ADMIN \
+        --cap-add=SYS_BOOT \
+        --cap-add=SYS_TIME \
+        --cap-add=KILL \
+        -e GREMLIN_TEAM_ID="f7270c37-8534-5c0a-b3e5-8ee8be83d10e" \
+        -e GREMLIN_TEAM_SECRET="b18b5621-ff7b-484f-8b56-21ff7b284fee" \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /Users/finneganhu/var/log/gremlin:/Users/finneganhu/var/log/gremlin \
+        -v /Users/finneganhu/var/lib/gremlin:/Users/finneganhu/var/lib/gremlin \
+        gremlin/gremlin attack cpu
+
+        docker run -d -it \
+            --cap-add=NET_ADMIN \
+            -e GREMLIN_TEAM_ID="f7270c37-8534-5c0a-b3e5-8ee8be83d10e" \
+            -e GREMLIN_TEAM_SECRET="b18b5621-ff7b-484f-8b56-21ff7b284fee" \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            gremlin/gremlin attack-container 50c589e46163 cpu
+
+
+
+            docker run -it \
+                --cap-add=NET_ADMIN \
+                -e GREMLIN_TEAM_ID="f7270c37-8534-5c0a-b3e5-8ee8be83d10e" \
+                -e GREMLIN_TEAM_SECRET="b18b5621-ff7b-484f-8b56-21ff7b284fee" \
+                -v /var/run/docker.sock:/var/run/docker.sock \
+                gremlin/gremlin attack-container 5c01df4fc2ee latency -h e426b171c028 -m 100 -l 30
+
+                docker run -it \
+                    --cap-add=NET_ADMIN \
+                    -e GREMLIN_TEAM_ID="f7270c37-8534-5c0a-b3e5-8ee8be83d10e" \
+                    -e GREMLIN_TEAM_SECRET="b18b5621-ff7b-484f-8b56-21ff7b284fee" \
+                    -v /var/run/docker.sock:/var/run/docker.sock \
+                    gremlin/gremlin attack-container 5c01df4fc2ee blackhole -h 50c589e46163 -l 20
+
+
+
+
+                docker run -d --net=host \
+                    --cap-add=NET_ADMIN --cap-add=SYS_BOOT --cap-add=SYS_TIME \
+                    --cap-add=KILL \
+                    -v $PWD/var/lib/gremlin:/var/lib/gremlin \
+                    -v $PWD/var/log/gremlin:/var/log/gremlin \
+                    -e GREMLIN_TEAM_ID="f7270c37-8534-5c0a-b3e5-8ee8be83d10e" \
+                    -e GREMLIN_TEAM_SECRET="b18b5621-ff7b-484f-8b56-21ff7b284fee" \
+                    gremlin/gremlin daemon
+
+                    helm install gremlin gremlin/gremlin \
+                        --namespace gremlin \
+                        --set gremlin.secret.managed=true \
+                        --set gremlin.secret.type=secret \
+                        --set gremlin.secret.teamID=f7270c37-8534-5c0a-b3e5-8ee8be83d10e \
+                        --set gremlin.secret.clusterID=minikube \
+                        --set gremlin.secret.teamSecret=b18b5621-ff7b-484f-8b56-21ff7b284fee

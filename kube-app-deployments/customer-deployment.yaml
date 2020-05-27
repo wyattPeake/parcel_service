@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: customer-deployment
+spec:
+    selector:
+        matchLabels:
+            app: customer
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: customer
+        spec:
+            containers:
+                - name: customer
+                  image: finneganhu/customer:prom
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 8081
+                  # env:
+                  #     - name: JAEGER_AGENT_HOST
+                  #       value: "jaeger"
+                  #     - name: JAEGER_AGENT_PORT
+                  #       value: "6831"

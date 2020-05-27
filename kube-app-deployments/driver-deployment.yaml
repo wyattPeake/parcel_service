@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: driver-deployment
+spec:
+    selector:
+        matchLabels:
+            app: driver
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: driver
+        spec:
+            containers:
+                - name: driver
+                  image: finneganhu/driver:prom
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 8082
+                  # env:
+                  #     - name: JAEGER_AGENT_HOST
+                  #       value: "jaeger"
+                  #     - name: JAEGER_AGENT_PORT
+                  #       value: "6831"

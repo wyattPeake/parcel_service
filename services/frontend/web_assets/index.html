@@ -1,0 +1,310 @@
+<html>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<head>
+
+  <title>TPS - Schedule a Pickup Request</title>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet"
+    href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+    integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+  <style>
+    .uuid {
+      background-color: rgb(226, 225, 225);
+    }
+
+    .alert {
+      margin-bottom: 0px;
+      padding: .75rem 0 0 0;
+    }
+
+    .hotrod-button:hover {
+      cursor: pointer;
+      background-color: #51c8e6
+    }
+
+    #hotrod-log {
+      margin-top: 15px;
+    }
+
+    #tip {
+      margin-top: 15px;
+      background-color: #F7B645;
+      border: solid 2px black;
+      text-align: left;
+    }
+
+    .vcenter {
+      display: inline-block;
+      vertical-align: middle;
+      float: none;
+    }
+
+    .vertical-align {
+      display: flex;
+      align-items: center;
+    }
+
+    #mybtn {
+      background-color: #603D96;
+      border: 1px solid #603D96;
+      border-color: #603D96;
+      width: 100%;
+    }
+   #errorbtn{
+     background-color: #FF585D;
+     border: solid 1px #FF585D;
+     border-color: #FF585D;
+     width: 100%;
+   }
+   .error-button:hover {
+      cursor: pointer;
+      background-color: #FF585D;
+    }
+
+   #hiddencol{
+     width: 20px;
+   }
+   h6{
+     font-size: .946rem;
+   }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #603D96;">
+    <a class="navbar-brand" href="#">
+      <img src="img/terazologo.png" height="50px" width="176" alt="">
+    </a>
+    <a class="navbar-brand" href="#" style="color: white;">Parcel Service</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" style="padding-left: 200px;">
+          <a class="nav-link" href="#" style="color: white;">Shipping <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" style="padding-left: 200px;">
+          <a class="nav-link" href="#" style="color: white;">Tracking</a>
+        </li>
+        <li class="nav-item active" style="padding-left: 200px;">
+          <a class="nav-link" href="#" style="color: white;">Support</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container" style="margin-top: 40px;">
+    <div class="row">
+      <div class='col'>
+        <h5>Pickups</h5>
+      </div>
+    </div>
+    <div class="row" style="border: solid 2px red; padding: 15px; background-color: rgb(226, 225, 225)">
+      <div class='col-md-12'>
+        <div class="row">
+          <div class='col'>
+            <h4 align="left" style="color: black">Schedule Freight Pickup Request</h4>
+          </div>
+        </div>
+        <div class="row" style="border: solid 2px #51c8e6;">
+          <div class='col-4' style="background-color: white;">
+            <div id="tip" style="color: black">&nbsp;&nbsp;Account</div>
+            <div class="row">
+              <div class='col'>
+                <div class="row vertical-align">
+                  <div class='col-6'  style="padding-right: 0px;">
+                    <h6 style="margin: 0px;">Baileys Motorsports</h6>
+                  </div>
+                  <div id ="hiddencol" style="padding: 0px;"></div>
+                  <div class='col-3' style="padding: 20px; margin-top: 10px; padding-left: 0px; padding-right: 0px;">
+                    <span id='mybtn' class="btn btn-outline-primary active hotrod-button" data-customer="123" data-location="VA" data-status="processed"
+                      style="color: white;">Request</span>
+                  </div>
+                  <div class='col-2' style="padding: 20px; margin-top: 10px; padding-left: 5px; padding-right: 5px;">
+                    <span id='errorbtn' class="btn btn-outline-primary active hotrod-button error-button" data-customer="123" data-location="VA" data-status="error"
+                      style="color: black;">X</span>
+                  </div>
+                </div>
+                <div class="row vertical-align">
+                  <div class='col-6' style="padding-right: 0px;">
+                    <h6 style="margin: 0px;">Worrell Esports Supplies</h6>
+                  </div>
+                  <div id ="hiddencol" style="padding: 0px;"></div>
+                  <div class='col-3' style="padding: 20px; margin-top: 10px; padding-left: 0px; padding-right: 0px;">
+                    <span id='mybtn' class="btn btn-outline-primary active hotrod-button" data-customer="392" data-location="MD" data-status="processed"
+                      style="color: white;">Request</span>
+                  </div>
+                  <div class='col-2' style="padding: 20px; margin-top: 10px; padding-left: 5px; padding-right: 5px;">
+                    <span id='errorbtn' class="btn btn-outline-primary active hotrod-button error-button" data-customer="392" data-location="MD" data-status="error"
+                      style="color: black;">X</span>
+                  </div>
+                </div>
+                <div class="row vertical-align">
+                  <div class='col-6'>
+                    <h6 style="margin: 0px;">Wyatt's Taxidermy, LLC</h6>
+                  </div>
+                  <div id ="hiddencol" style="padding: 0px;"></div>
+                  <div class='col-3' style="padding: 20px; margin-top: 10px; padding-left: 0px; padding-right: 0px;">
+                    <span id='mybtn' class="btn btn-outline-primary active hotrod-button" data-customer="731" data-location="AL" data-status="processed"
+                      style="color: white;">Request</span>
+                  </div>
+                  <div class='col-2' style="padding: 20px; margin-top: 10px; padding-left: 5px; padding-right: 5px;">
+                    <span id='errorbtn' class="btn btn-outline-primary active hotrod-button error-button" data-customer="731" data-location="AL" data-status="error"
+                      style="color: black;">X</span>
+                  </div>
+                </div>
+                <div class="row vertical-align">
+                  <div class='col-6'>
+                    <h6 style="margin: 0px;">Hu's Whiskey Distillery</h6>
+                  </div>
+                  <div id ="hiddencol" style="padding: 0px;"></div>
+                  <div class='col-3' style="padding: 20px; margin-top: 10px; padding-left: 0px; padding-right: 0px;">
+                    <span id='mybtn' class="btn btn-outline-primary active hotrod-button" data-customer="567" data-location="MA" data-status="processed"
+                      style="color: white;">Request</span>
+                  </div>
+                  <div class='col-2' style="padding: 20px; margin-top: 10px; padding-left: 5px; padding-right: 5px;">
+                    <span id='errorbtn' class="btn btn-outline-primary active hotrod-button error-button" data-customer="567" data-location="MA" data-status="error"
+                      style="color: black;">X</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='col-8' style="background-color: white;">
+            <div class="row">
+              <div class="col">
+                <div id="tip" style="color: black">&nbsp;&nbsp;Request Status</div>
+                <div id="hotrod-log" class="lead" style="max-height: 330px; overflow: hidden;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uuid alert alert-info footer" style="color: black;"></div>
+    </div>
+
+
+
+
+  </div>
+</body>
+
+<script>
+
+
+  function formatDuration(duration) {
+    var d = duration / (1000000 * 1000 * 60);
+    var units = 'min';
+    return Math.round(d) + units;
+  }
+
+  var clientUUID = Math.round(Math.random() * 10000);
+  var lastRequestID = 0;
+  var latitude
+  var longitude
+
+  function success(position) {
+    latitude  = position.coords.latitude;
+    longitude = position.coords.longitude;
+    console.log(" lat long")
+    console.log(latitude)
+    console.log(longitude)
+  }
+
+  function error() {
+    status.textContent = 'Unable to retrieve your location';
+  }
+    if(!navigator.geolocation) {
+    status.textContent = 'Geolocation is not supported by your browser';
+  } else {
+    status.textContent = 'Locating…';
+    navigator.geolocation.getCurrentPosition(success, error);
+
+  }
+
+  $(".uuid").html("Requestor client ID: <strong>" + clientUUID + "</strong>");
+
+  $(".hotrod-button").click(function (evt) {
+    lastRequestID++;
+    var requestID = clientUUID + "-" + lastRequestID;
+    var freshCar = $($("#hotrod-log").prepend('<div class="fresh-car" style="color:black"><em><small>Matching freight pickup request with driver...[req: ' + requestID + ']</small></em></div>').children()[0]);
+
+    var customer = evt.target.dataset.customer;
+    var location = evt.target.dataset.location;
+    var status = evt.target.dataset.status;
+    console.log(" customer =" + customer)
+    console.log(" location =" + location)
+    console.log(" status =" + status)
+
+
+    headers = {
+      'jaeger-baggage': 'session=' + clientUUID + ', request=' + requestID,
+      'location': location,
+      'latitude': latitude,
+      'longitude': longitude,
+      'status': status,
+    };
+    console.log(headers);
+    var before = Date.now();
+
+    // Use current URI as basepath for ajax requests
+    var pathPrefix = window.location.pathname;
+    pathPrefix = pathPrefix != "/" ? pathPrefix : '';
+
+    $.ajax(pathPrefix + '/dispatch?customer=' + customer + '&nonse=' + Math.random(), {
+      headers: headers,
+      method: 'GET',
+      success: function (data, textStatus) {
+        var after = Date.now();
+        console.log(data);
+        var duration = formatDuration(data.ETA);
+        if (customer == '123') {
+          freshCar.html('<small><strong>Bailey\'s Motorsports</strong> - Pickup <strong>' + requestID + '</strong> Scheduled for Driver <strong>' + data.Driver + '</strong> Request took <strong>' + (after - before) + '</strong>ms</small>');
+        } else if (customer == '392') {
+          freshCar.html('<small><strong>Worrell Esports Supplies</strong> - Pickup <strong>' + requestID + '</strong> Scheduled for Driver <strong>' + data.Driver + '</strong> Request took <strong>' + (after - before) + '</strong>ms</small>');
+        } else if (customer == '731') {
+          freshCar.html('<small><strong>Wyatt\'s Taxidermy</strong> - Pickup <strong>' + requestID + '</strong> Scheduled for Driver <strong>' + data.Driver + '</strong> Request took <strong>' + (after - before) + '</strong>ms</small>');
+        }
+        else {
+          freshCar.html('<small><strong>Hu\'s Irish Whiskey</strong> - Pickup <strong>' + requestID + '</strong> Scheduled for Driver <strong>' + data.Driver + '</strong> Request took <strong>' + (after - before) + '</strong>ms</small>');
+        }
+
+      },
+
+      error: function(data, textStatus){
+        sleep(Math.floor(Math.random()*500)+100).then(()=>{
+        var after = Date.now();
+        console.log(data);
+        var duration = formatDuration(data.ETA);
+        if (customer == '123') {
+          freshCar.html('<small style="color:#FF585D"><strong>Request '+requestID+ '</strong> for <strong>Bailey\'s Motorsports</strong> has <strong>failed</strong> in <strong>'+(after - before)+'</strong> ms, caused by validation error</small>');
+        } else if (customer == '392') {
+          freshCar.html('<small style="color:#FF585D"><strong>Request '+requestID+ '</strong> for <strong>Worrell Esports Supplies</strong> has <strong>failed</strong> in <strong>'+(after - before)+'</strong> ms, caused by validation error</small>');
+        } else if (customer == '731') {
+          freshCar.html('<small style="color:#FF585D"><strong>Request '+requestID+ '</strong> for <strong>Wyatt\'s Taxidermy</strong> has <strong>failed</strong> in <strong>'+(after - before)+'</strong> ms, caused by validation error</small>');
+        }
+        else {
+          freshCar.html('<small style="color:#FF585D"><strong>Request '+requestID+ '</strong> for <strong>Hu\'s Irish Whiskey</strong> has <strong>failed</strong> in <strong>'+(after - before)+'</strong> ms, caused by validation error</small>');
+        }
+      })
+      }
+    });
+  });
+
+  function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+</script>
+
+</html>

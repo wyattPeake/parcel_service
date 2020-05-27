@@ -1,0 +1,17 @@
+groups:
+- name: alerting_rules
+  rules:
+  - alert: HighRequestorErrorRate
+    expr: sum(rate(processed_by_request{status="error"}[1m])) > 0.2
+    labels:
+      severity: error
+      team: luck_dragons
+    annotations:
+      description: Rate of requstor errors has reached *{{ $value }}*!
+  - alert: HighContainerCPUUsage
+    expr: sum by(container_instance_id)(rate(container_cpu_usage_seconds_total{}[5m])*100) > 80
+    labels:
+      severity: warn
+      team: luck_dragons
+    annotations:
+      description: Percentage of total container CPU usage has reached *{{ $value }}*!

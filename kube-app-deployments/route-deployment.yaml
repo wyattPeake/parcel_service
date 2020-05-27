@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: route-deployment
+spec:
+    selector:
+        matchLabels:
+            app: route
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: route
+        spec:
+            containers:
+                - name: route
+                  image: finneganhu/route:prom
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 8083
+                  # env:
+                  #     - name: JAEGER_AGENT_HOST
+                  #       value: "jaeger"
+                  #     - name: JAEGER_AGENT_PORT
+                  #       value: "6831"
