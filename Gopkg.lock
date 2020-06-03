@@ -274,7 +274,8 @@
   version = "v1.15.0"
 
 [[projects]]
-  digest = "1:80ea34c231a3991a7942bc69510c75091942c3ca8d613a7e72e6b432e67ce54e"
+  branch = "master"
+  digest = "1:bf884b2598986ef807206b58fd5781c51ec3fc5ca2918658e97b8e0eb97d4461"
   name = "golang.org/x/net"
   packages = [
     "bpf",
@@ -285,17 +286,19 @@
     "ipv6",
   ]
   pruneopts = "UT"
-  revision = "c00fd9afed17cfdca9b3e1e3b8de7ef2b3f0347b"
+  revision = "627f9648deb96c27737b83199d44bb5c1010cbcf"
 
 [[projects]]
-  digest = "1:e5f1274f1fb891d9dac94ea499b4cf457217b6d2face92ce8730f814c99bc743"
+  branch = "master"
+  digest = "1:30986a354a6c49a3706fa3483998a10328724f105b32b2911ac3554fc649579b"
   name = "golang.org/x/sys"
   packages = [
+    "internal/unsafeheader",
     "unix",
     "windows",
   ]
   pruneopts = "UT"
-  revision = "1a700e749ce29638d0bbcb531cce1094ea096bd3"
+  revision = "6fdc65e7d9800cc59998e8ac0d9406a20ff5f399"
 
 [[projects]]
   digest = "1:310da5159baf5e46ce8d11a0cbcfe4c32cfdcb759e4fb284a71d094304e94be1"

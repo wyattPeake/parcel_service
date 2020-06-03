@@ -33,7 +33,6 @@ import (
 	"time"
 
 	"io/ioutil"
-	"math/rand"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -78,11 +77,6 @@ func recordMetrics() {
 			time.Sleep(1 * time.Second)
 		}
 	}()
-}
-
-func diceroll(x int) bool {
-	roll := rand.Intn(x)
-	return (roll < 2)
 }
 
 // Then ...
@@ -187,26 +181,21 @@ func (s *Server) customer(w http.ResponseWriter, r *http.Request) {
 	// im sorry
 	location := "CA"
 	region := "North West"
-	diceParam := 20
 
 	if customerID == "123" {
 		location = "WA"
 		region = "north-west"
-		diceParam = 20
 	} else if customerID == "567" {
 		location = "OR"
 		region = "north-west"
-		diceParam = 20
 	} else if customerID == "392" {
 		location = "CA"
 		region = "south-west"
-		diceParam = 10
 	} else {
 		location = "AL"
 		region = "south-east"
-		diceParam = 15
 	}
-	fmt.Println(diceParam)
+
 	// if there is an error count it
 	if GetTruck(r, s, region) {
 		customerProcessedCounterVec.WithLabelValues(customerID, r.Method, location, region, "error").Inc()
