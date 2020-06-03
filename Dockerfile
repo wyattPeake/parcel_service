@@ -17,4 +17,4 @@ COPY --from=builder /app ./
 EXPOSE 8080 8081 8082 8083 8084 8085
 
 ENTRYPOINT ["./app"]
-CMD ["customer"]
+CMD ["driver"]

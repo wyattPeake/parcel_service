@@ -84,6 +84,7 @@ services:
             - route
             - driver
             - customer
+            - thirdparty
     # gremlin:
     #     image: gremlin/gremlin
     #     pid: "host"

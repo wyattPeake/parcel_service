@@ -24,7 +24,7 @@ func newTruck(region string, capacity int) *Truck {
 }
 
 var trucks []Truck
-var maxCapacity = 3
+var maxCapacity = 10
 
 // creates a slice of trucks in every region
 func createTrucks() {
