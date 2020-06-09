@@ -131,7 +131,16 @@ func (s *Server) createServeMux() http.Handler {
 // find an available truck in that region
 func GetTruck(r *http.Request, s *Server, region string) bool {
 	ctx := r.Context()
-	response, err := http.Get("http://thirdparty:8085/shipping/findtruck/" + region)
+	url := "http://north-west-service:8085/shipping/findtruck/" + region
+
+	if region == "south-west"{
+		url = "http://south-west-service:8086/shipping/findtruck/" + region
+	}
+	if region == "south-east"{
+		url = "http://south-east-service:8087/shipping/findtruck/" + region
+	}
+
+	response, err := http.Get(url)
 	if err != nil {
 		s.logger.For(ctx).Error("GetTruck  error", zap.Error(err))
 	}
