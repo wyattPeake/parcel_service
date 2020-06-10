@@ -14,7 +14,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o /app .
 FROM alpine:latest
 COPY --from=builder /app ./
 
-EXPOSE 8080 8081 8082 8083 8084 8085
+EXPOSE 8080 8081 8082 8083 8084 8085 8086 8087
 
 ENTRYPOINT ["./app"]
-CMD ["thirdparty"]
+CMD ["south-east-service"]

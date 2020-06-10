@@ -31,8 +31,8 @@ func createTrucks() {
 
 	for i := 0; i < 2; i++ {
 		trucks = append(trucks, Truck{"north-west", maxCapacity})
-		trucks = append(trucks, Truck{"south-west", maxCapacity})
-		trucks = append(trucks, Truck{"south-east", maxCapacity})
+		trucks = append(trucks, Truck{"north-west", maxCapacity})
+		trucks = append(trucks, Truck{"north-west", maxCapacity})
 	}
 }
 

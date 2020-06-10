@@ -29,10 +29,18 @@ services:
         environment:
             - JAEGER_AGENT_HOST=jaeger
             - JAEGER_AGENT_PORT=6831
-    thirdparty:
-        image: finneganhu/thirdparty:prom
+    north-west-service:
+        image: finneganhu/north-west-service:latest
         ports:
             - "8085:8085"
+    south-east-service:
+        image: finneganhu/south-east-service:latest
+        ports:
+            - "8087:8087"
+    south-west-service:
+        image: finneganhu/south-west-service:latest
+        ports:
+            - "8086:8086"
 
     jaeger:
         image: jaegertracing/all-in-one:latest
@@ -84,7 +92,6 @@ services:
             - route
             - driver
             - customer
-            - thirdparty
     # gremlin:
     #     image: gremlin/gremlin
     #     pid: "host"
